@@ -43,7 +43,7 @@ export default function Navbar() {
               </Link>
             ))}
           </div>
-          <button className="bg-[#FFD33F] text-sm font-semibold py-3 px-5 rounded-full uppercase hover:bg-[#FFD33F]/80">
+          <button className="bg-frensYellow text-sm font-semibold py-3 px-5 rounded-full uppercase hover:bg-[#FFD33F]/80">
             Launch App
           </button>
         </div>

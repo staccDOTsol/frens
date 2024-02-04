@@ -1,3 +1,3 @@
 export default function ValutsPage() {
-  return <div>Valuts</div>;
+  return <div className="">vaults</div>;
 }
