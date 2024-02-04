@@ -5,7 +5,7 @@ export default function Navbar() {
   const routes = [
     {
       path: '/vaults',
-      label: 'Valuts',
+      label: 'Vaults',
     },
     {
       path: '/winners',
