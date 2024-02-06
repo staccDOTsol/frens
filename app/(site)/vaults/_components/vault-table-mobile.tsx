@@ -9,9 +9,9 @@ import {
 
 export default function VaultTableMobile({ data }: { data: any }) {
   return (
-    <div className="space-y-12 my-12">
+    <div className="space-y-12 block md:hidden my-12">
       {data.map((data: any, i: number) => (
-        <Table key={i} className="block md:hidden max-w-3xl bg-white mx-auto">
+        <Table key={i} className="max-w-3xl bg-white mx-auto">
           <TableHeader>
             <TableRow>
               <TableHead className="w-[300px] text-center">
