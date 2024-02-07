@@ -27,7 +27,7 @@ export default function WinnerTableMobile() {
         </Badge>
       </div>
 
-      <Table className=" bg-white max-w-96">
+      <Table className="bg-white max-w-96">
         <TableHeader>
           <TableRow>
             <TableHead>Address</TableHead>
