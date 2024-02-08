@@ -8,15 +8,10 @@ import {
 } from '@/components/ui/table';
 import Badge from '@/components/badge';
 
-export default function WinnerTable() {
+export default function PoolersTable() {
   return (
-    <div className="flex-col justify-center items-center gap-6 hidden md:flex">
-      <div className="flex gap-6">
-        <Badge>
-          <p>
-            Vaults <span className="font-bold">2</span>
-          </p>
-        </Badge>
+    <div className=" flex-col justify-center items-center hidden md:flex">
+      <div className="flex flex-row gap-8 mb-10">
         <Badge>
           <p>
             Unique Winners <span className="font-bold">20</span>
@@ -31,42 +26,24 @@ export default function WinnerTable() {
           </div>
         </Badge>
       </div>
-      <div>
-        <Table className="hidden md:block max-w-4xl bg-white mx-auto">
+
+      <div className="w-full max-w-xl px-2 md:px-0">
+        <Table className="bg-white mx-auto">
           <TableHeader>
             <TableRow>
               <TableHead>Address</TableHead>
-              <TableHead>Vault</TableHead>
-              <TableHead>Amount</TableHead>
+              <TableHead>Balance</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {[...Array(3)].map((_, i) => (
               <TableRow key={i}>
-                <TableCell className="font-medium w-64">
-                  <div className="font-normal">
+                <TableCell className="font-medium ">
+                  <div className="font-normal truncate">
                     3EGBWpVrkrnVjCGvGsk9WbMwHJLt2yNuhqKLSg7fU3xh
                   </div>
                 </TableCell>
-                <TableCell className="font-medium w-64">
-                  <div className="flex flex-row items-center gap-2">
-                    <div className="flex -space-x-2">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        className="w-10"
-                        src="/images/solana-logo-19.png"
-                        alt="logo"
-                      />
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        className="w-10"
-                        src="/images/bsol-73.png"
-                        alt="logo"
-                      />
-                    </div>
-                    <p>bSOL - SOL</p>
-                  </div>
-                </TableCell>
+
                 <TableCell>
                   <div className="flex items-center gap-2">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
