@@ -1,3 +1,4 @@
+import Footer from '@/components/footer';
 import {
   Card,
   CardHeader,
@@ -10,8 +11,8 @@ import { Separator } from '@/components/ui/separator';
 export default function HomePage() {
   return (
     <div className="h-full flex justify-center items-center">
-      <div className="max-w-screen-xl w-full">
-        <div className="flex flex-col md:flex-row justify-center max-w-screen-xl mx-auto px-4 py-6 gap-4">
+      <div className="max-w-screen-2xl w-full">
+        <div className="flex flex-col md:flex-row justify-center max-w-screen-2xl mx-auto px-4 py-6 gap-4">
           <div className="flex-1 p-4 space-y-3">
             <p className="text-xl">One-Click Megayield</p>
             <h1 className="text-6xl font-bold">

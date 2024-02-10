@@ -10,7 +10,7 @@ import {
 
 export default function HistoryTableMobile() {
   return (
-    <div className="flex-col justify-center items-center gap-6 flex md:hidden ">
+    <div className="flex-col justify-center items-center gap-6 flex md:hidden my-12">
       <div className="flex gap-6">
         <Badge>
           <p>

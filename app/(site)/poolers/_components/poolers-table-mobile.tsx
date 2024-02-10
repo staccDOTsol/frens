@@ -10,7 +10,7 @@ import Badge from '@/components/badge';
 
 export default function PoolersTableMobile() {
   return (
-    <div className="md:hidden">
+    <div className="md:hidden my-12">
       <div className="flex flex-row gap-8 mb-10">
         <Badge>
           <p>
