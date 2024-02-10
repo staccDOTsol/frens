@@ -22,7 +22,7 @@ export default function Navbar() {
   ];
   return (
     <div className="bg-transparent">
-      <nav className="max-w-screen-2xl mx-auto flex justify-between items-center p-6">
+      <nav className="max-w-[1640px] mx-auto flex justify-between items-center p-6">
         <Link href="/home">
           <Image
             src="/images/frens-logo-17.png"
