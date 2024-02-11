@@ -5,13 +5,13 @@ export default function Background() {
       <img
         src="/images/vector-1580-10.png"
         alt=""
-        className="fixed -top-20 -left-20 w-1/2 rotate-0"
+        className="absolute -top-20 -left-20 w-1/2 rotate-0"
       />
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src="/images/vector-1580-9.png"
         alt=""
-        className="fixed -bottom-20 -right-20 w-1/2 rotate-0"
+        className="absolute -bottom-20 -right-20 w-1/2 rotate-0"
       />
 
       <div className="fixed bottom-24 left-24">

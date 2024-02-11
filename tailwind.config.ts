@@ -18,6 +18,9 @@ const config = {
       },
     },
     extend: {
+      screens: {
+        ml: { min: '1025px', max: '1279px' },
+      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',

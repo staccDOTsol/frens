@@ -8,7 +8,7 @@ export default function SiteLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="h-screen flex flex-col relative">
+    <div className="h-screen flex flex-col relative overflow-hidden">
       <Background />
       <Navbar />
       <main className="flex-1">{children}</main>
