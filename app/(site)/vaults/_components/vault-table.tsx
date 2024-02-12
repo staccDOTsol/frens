@@ -9,10 +9,10 @@ import {
 
 export default function VaultTable({ data }: { data: any }) {
   return (
-    <Table className="hidden md:block max-w-4xl bg-white mx-auto">
+    <Table className="hidden xl:block max-w-[1545px] w-full bg-white mx-auto">
       <TableHeader>
-        <TableRow>
-          <TableHead className="w-[100px]">Vault</TableHead>
+        <TableRow className="text-lg lg:text-2xl">
+          <TableHead>Vault</TableHead>
           <TableHead>Poolers</TableHead>
           <TableHead>7 Day Yield</TableHead>
           <TableHead>Valut APR</TableHead>
@@ -21,10 +21,10 @@ export default function VaultTable({ data }: { data: any }) {
           <TableHead>TLV</TableHead>
         </TableRow>
       </TableHeader>
-      <TableBody>
+      <TableBody className="text-[22px] font-medium">
         {data.map((data: any, i: number) => (
           <TableRow key={i}>
-            <TableCell className="font-medium w-64">
+            <TableCell>
               <div className="flex flex-row items-center gap-2">
                 <div className="flex -space-x-2">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
