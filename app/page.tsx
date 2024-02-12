@@ -16,7 +16,7 @@ export default function WelcomePage() {
     <div className="">
       <WelcomeBackground />
       <Navbar />
-      <div className="mt-12 md:mt-44 flex justify-center items-center">
+      <div className="md:mt-44 flex justify-center items-center">
         <div className="max-w-screen-2xl w-full">
           <div className="flex flex-col lg:flex-row justify-center mx-auto px-4 py-6 gap-12 mg:gap-0">
             <div className="flex-1 p-4 space-y-3 max-w-[650px] w-full">
@@ -29,14 +29,6 @@ export default function WelcomePage() {
               <p className="hidden md:block text-[40px] font-extrabold">
                 One-Click Megayield.
               </p>
-              <p className="text-sm text-[#707070] md:text-xl">
-                It’s a one click megayield button. ATOW bsol yield is 6.471% and
-                bsol, which you re-stake 76% of, is 6.969%. You will yield 1 *
-                6.471% + 0.74 * 6.969% = 11.76744% per $ deposited.
-              </p>
-              <button className="bg-frensYellow text-sm font-semibold py-3 px-5 rounded-full uppercase hover:bg-[#FFD33F]/80">
-                Launch App
-              </button>
             </div>
             <div className="flex-1 flex justify-center lg:justify-end items-start">
               <Card className="max-w-[358px] w-full">

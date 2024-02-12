@@ -23,7 +23,7 @@ export default function Navbar() {
   return (
     <div className="bg-transparent">
       <nav className="max-w-[1640px] mx-auto flex justify-between items-center p-6">
-        <Link href="/home">
+        <Link href="/">
           <Image
             src="/images/frens-logo-17.png"
             alt="Fens Loog"
@@ -43,9 +43,12 @@ export default function Navbar() {
               </Link>
             ))}
           </div>
-          <button className="bg-frensYellow text-sm font-semibold py-3 px-5 rounded-full uppercase hover:bg-[#FFD33F]/80">
+          <Link
+            href="/home"
+            className="bg-frensYellow text-sm font-semibold py-3 px-5 rounded-full uppercase hover:bg-[#FFD33F]/80"
+          >
             Launch App
-          </button>
+          </Link>
         </div>
       </nav>
     </div>
