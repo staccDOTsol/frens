@@ -12,13 +12,18 @@ export default function HomePage() {
   return (
     <div className="h-full flex justify-center items-center">
       <div className="max-w-screen-2xl w-full">
-        <div className="flex flex-col md:flex-row justify-center max-w-screen-2xl mx-auto px-4 py-6 gap-4">
-          <div className="flex-1 p-4 space-y-3">
-            <p className="text-xl">One-Click Megayield</p>
-            <h1 className="text-6xl font-bold">
+        <div className="flex flex-col lg:flex-row justify-center max-w-screen-2xl mx-auto px-4 py-6 gap-4">
+          <div className="flex-1 p-4 space-y-2 md:space-y-3 max-w-[650px] w-full">
+            <p className="text-base md:text-[22px]">One-Click Megayield</p>
+            <h1 className="text-[35px] md:text-6xl font-bold leading-tight">
               Friends With Benefits. Deposit for a daily chance to win
             </h1>
-            <ul className="text-xl text-gray-400 space-y-2">
+            <p className="md:hidden text-sm text-[#707070]">
+              It’s a one click megayield button. ATOW bsol yield is 6.471% and
+              bsol, which you re-stake 76% of, is 6.969%. You will yield 1 *
+              6.471% + 0.74 * 6.969% = 11.76744% per $ deposited.
+            </p>
+            <ul className="text-sm md:text-[22px] text-gray-400 space-y-2">
               <li className="flex items-center gap-3">
                 <div className="w-5 h-5 bg-frensYellow rounded-full flex items-center justify-center">
                   <div className="w-2 h-2 bg-white rounded-full"></div>
@@ -39,8 +44,8 @@ export default function HomePage() {
               </li>
             </ul>
           </div>
-          <div className="flex-1 flex flex-col md:flex-row gap-4">
-            <div className="md:w-1/2 w-4/5 mx-auto">
+          <div className="flex-1 flex flex-col md:flex-row gap-4 items-start">
+            <div className="max-w-[358px] w-full mx-auto">
               <Card>
                 <CardHeader className="">
                   <div className="flex items-center justify-center">
@@ -107,7 +112,7 @@ export default function HomePage() {
                 </CardFooter>
               </Card>
             </div>
-            <div className="md:w-1/2 w-4/5 mx-auto">
+            <div className="max-w-[358px] w-full mx-auto">
               <Card>
                 <CardHeader className="">
                   <div className="flex items-center justify-center">
