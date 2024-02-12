@@ -10,15 +10,15 @@ import {
 
 export default function HistoryTable() {
   return (
-    <div className="flex-col justify-center items-center gap-6 hidden md:flex">
+    <div className="flex-col justify-center items-center gap-6 hidden xl:flex">
       <div className="flex gap-6">
         <Badge>
-          <p>
+          <p className="text-lg">
             Total Prizes <span className="font-bold">2,222</span>
           </p>
         </Badge>
         <Badge>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 text-lg">
             <p>Total Won</p>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img className="w-5 h-5" src="/images/bsol-73.png" alt="logo" />
@@ -26,7 +26,7 @@ export default function HistoryTable() {
           </div>
         </Badge>
         <Badge>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 text-lg">
             <p>Average Per Draw</p>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img className="w-5 h-5" src="/images/bsol-73.png" alt="logo" />
@@ -38,14 +38,14 @@ export default function HistoryTable() {
       <div className="w-full max-w-5xl px-2 md:px-0">
         <Table className="bg-white">
           <TableHeader>
-            <TableRow>
+            <TableRow className="text-lg lg:text-2xl">
               <TableHead>Draw</TableHead>
               <TableHead>Unique Winners</TableHead>
               <TableHead>Prizes Won</TableHead>
               <TableHead>Amount</TableHead>
             </TableRow>
           </TableHeader>
-          <TableBody>
+          <TableBody className="text-[22px] font-normal">
             {[...Array(5)].map((_, i) => (
               <TableRow key={i} className="font-medium">
                 <TableCell>Draw {i}</TableCell>

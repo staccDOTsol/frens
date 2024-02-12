@@ -10,15 +10,15 @@ import {
 
 export default function HistoryTableMobile() {
   return (
-    <div className="flex-col justify-center items-center gap-6 flex md:hidden my-12">
+    <div className="flex-col justify-center items-center gap-6 flex xl:hidden my-12">
       <div className="flex gap-6">
         <Badge>
-          <p>
+          <p className="text-sm">
             Total Prizes <span className="font-bold">2,222</span>
           </p>
         </Badge>
         <Badge>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 text-sm">
             <p>Total Won</p>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img className="w-5 h-5" src="/images/bsol-73.png" alt="logo" />
@@ -28,15 +28,15 @@ export default function HistoryTableMobile() {
       </div>
 
       <div className="w-100">
-        <Table className="bg-white mx-auto w-[358px]">
+        <Table className="bg-white mx-auto">
           <TableHeader>
-            <TableRow>
+            <TableRow className="text-lg">
               <TableHead>Draw</TableHead>
               <TableHead>Prizes Won</TableHead>
               <TableHead>Amount</TableHead>
             </TableRow>
           </TableHeader>
-          <TableBody>
+          <TableBody className="text-sm">
             {[...Array(5)].map((_, i) => (
               <TableRow key={i}>
                 <TableCell className="font-medium"># {i}</TableCell>
