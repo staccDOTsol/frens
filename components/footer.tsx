@@ -45,13 +45,16 @@ export default function Footer() {
               </li>
 
               <li>
+                <Link href="/history">History</Link>
+              </li>
+              <li>
                 <Link href="/poolers">Poolers</Link>
               </li>
               <li>
-                <Link href="/#">Yield</Link>
+                <Link href="/home">Home</Link>
               </li>
               <li>
-                <Link href="/#">Claims</Link>
+                <Link href="/">Welcome</Link>
               </li>
             </ul>
           </div>
