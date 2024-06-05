@@ -178,12 +178,12 @@ tx.feePayer = wallet?.publicKey as PublicKey
                 }}
                 railStyle={{ backgroundColor: 'gray', height: 10 }}
               />
-              <Button onClick={handleDepositSol} color="green" size="lg" className="mt-4">
-                Buy SOL
+              <Button onClick={handleDepositSol} color="darkgreen" size="lg" className="mt-4">
+                Buy meSOL
               </Button>
               {checkTokenAccounts && (
-                <Button onClick={handleWithdrawSol} color="red" size="lg" className="mt-4">
-                  Sell SOL
+                <Button onClick={handleWithdrawSol} color="darkred" size="lg" className="mt-4">
+                  Sell meSOL
                 </Button>
               )}
               <h1 className="text-[35px] md:text-6xl font-extrabold leading-none">
