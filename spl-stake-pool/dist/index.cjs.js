@@ -1778,7 +1778,7 @@ async function withdrawSol(connection, stakePoolAddress, tokenOwner, solReceiver
     const instructions = [];
     const userTransferAuthority = web3_js.Keypair.generate();
     const signers = [userTransferAuthority];
-    instructions.push(splToken.createApproveInstruction(poolTokenAccount, userTransferAuthority.publicKey, tokenOwner, poolAmount));
+    instructions.push(splToken.createApproveInstruction(poolTokenAccount, userTransferAuthority.publicKey, tokenOwner, poolAmount, [], splToken.TOKEN_2022_PROGRAM_ID));
     const poolWithdrawAuthority = await findWithdrawAuthorityProgramAddress(STAKE_POOL_PROGRAM_ID, stakePoolAddress);
     if (solWithdrawAuthority) {
         const expectedSolWithdrawAuthority = stakePool.account.data.solWithdrawAuthority;

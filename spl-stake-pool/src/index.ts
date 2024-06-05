@@ -50,12 +50,7 @@ import {
   ValidatorAccount,
 } from './utils';
 
-export type {
-  AccountType,
-  StakePool,
-  ValidatorList,
-  ValidatorStakeInfo,
-} from './layouts';
+export type { AccountType, StakePool, ValidatorList, ValidatorStakeInfo } from './layouts';
 export { STAKE_POOL_PROGRAM_ID } from './constants';
 export * from './instructions';
 
@@ -641,6 +636,8 @@ export async function withdrawSol(
       userTransferAuthority.publicKey,
       tokenOwner,
       poolAmount,
+      [],
+      TOKEN_2022_PROGRAM_ID
     ),
   );
 
