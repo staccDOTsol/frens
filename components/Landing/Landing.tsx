@@ -51,7 +51,7 @@ const stakeAddy = new PublicKey("tJ2sKEdsGXsxsUZrtrgBcqUWopKEVd3ijkXJ2LR46z5")
 export default function WelcomePage() {
   const { connection } = useConnection();
   const wallet = useWallet();
-  const [amount, setAmount] = useState("0");
+  const [amount, setAmount] = useState(0);
 
   const [lamports, setLamports] = useState(0);
   const [poolers, setPoolers] = useState(0);
