@@ -153,7 +153,9 @@ tx.feePayer = wallet?.publicKey as PublicKey
             <div className="flex-1 p-4 space-y-3 max-w-[650px] w-full">
               <p className="text-base md:text-[22px]">
                 A prize pool protocol with friends.
-              </p><Slider
+              </p>
+              {amount} Sol
+              <Slider
                 min={0}
                 max={50}
                 step={0.1}
@@ -177,8 +179,10 @@ tx.feePayer = wallet?.publicKey as PublicKey
                   backgroundColor: 'white',
                 }}
                 railStyle={{ backgroundColor: 'gray', height: 10 }}
-              />
-              <Button onClick={handleDepositSol}   style={{
+              /> <div className="flex space-x-4 mt-4">
+              <Button 
+                onClick={handleDepositSol} 
+                style={{
                   backgroundColor: '#28a745', 
                   color: 'white', 
                   borderRadius: '8px', 
@@ -188,7 +192,7 @@ tx.feePayer = wallet?.publicKey as PublicKey
                   boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
                 }} 
                 size="lg" 
-                className="mt-4 hover:bg-green-700 transition duration-300 ease-in-out"
+                className="hover:bg-green-700 transition duration-300 ease-in-out"
               >
                 Buy meSOL
               </Button>
@@ -205,11 +209,12 @@ tx.feePayer = wallet?.publicKey as PublicKey
                     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
                   }} 
                   size="lg" 
-                  className="mt-4 hover:bg-red-700 transition duration-300 ease-in-out"
+                  className="hover:bg-red-700 transition duration-300 ease-in-out"
                 >
                   Sell meSOL
                 </Button>
               )}
+            </div>
               <h1 className="text-[35px] md:text-6xl font-extrabold leading-none">
                 Frens with Benefits. Pool together & win.
               </h1>
