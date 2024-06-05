@@ -1,13 +1,18 @@
 import {
-  Title,
-  Text,
   Card,
-  SimpleGrid,
   Container,
   rem,
+  SimpleGrid,
+  Text,
+  Title,
   useMantineTheme,
 } from '@mantine/core';
-import { IconGauge, IconCoin, IconBolt } from '@tabler/icons-react';
+import {
+  IconBolt,
+  IconCoin,
+  IconGauge,
+} from '@tabler/icons-react';
+
 import classes from './FeaturesCards.module.css';
 
 const data = [
@@ -62,7 +67,7 @@ export function FeaturesCards() {
       </Title>
 
       <Text c="dimmed" className={classes.description} ta="center" mt="md">
-        A really cool description explaining why your product is the best thing since sliced bread. It's so good, you'll never want to use anything else. Make sure to include some buzzwords like "revolutionary" and "disruptive" to really drive the point home.
+        A really cool description explaining why your product is the best thing since sliced bread. It&apos;s so good, you&apos;ll never want to use anything else. Make sure to include some buzzwords like &quot;revolutionary&quot; and &quot;disruptive&quot; to really drive the point home.
       </Text>
 
       <SimpleGrid cols={{ base: 1, md: 3 }} spacing="xl" mt={50}>
