@@ -52,7 +52,6 @@ export default function WelcomePage() {
   const { connection } = useConnection();
   const wallet = useWallet();
   const [amount, setAmount] = useState("0");
-  const mintAddy = new PublicKey("YourMintAddressHere");
 
   const [lamports, setLamports] = useState(0);
   const [poolers, setPoolers] = useState(0);
