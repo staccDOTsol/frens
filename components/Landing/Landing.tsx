@@ -1,4 +1,3 @@
-
 "use client"
 import 'rc-slider/assets/index.css';
 
@@ -56,7 +55,7 @@ export default function WelcomePage() {
   const [lamports, setLamports] = useState(0);
   const [poolers, setPoolers] = useState(0);
 
-  const stakePoolAddress = new PublicKey("GJwP3bZcMXgej4eGz7LBBexFjpJ8c5dXLqU4rJP5HzRE");//GJwP3bZcMXgej4eGz7LBBexFjpJ8c5dXLqU4rJP5HzRE
+  const stakePoolAddress = new PublicKey("GJwP3bZcMXgej4eGz7LBBexFjpJ8c5dXLqU4rJP5HzRE");
   
   const handleDepositSol = async () => {
     if (!wallet || !wallet.publicKey || !wallet.signTransaction) return;
@@ -68,12 +67,12 @@ export default function WelcomePage() {
         ...instructions.instructions);
     
       tx.recentBlockhash = (await connection.getRecentBlockhash()).blockhash
-tx.feePayer = wallet?.publicKey as PublicKey
+      tx.feePayer = wallet?.publicKey as PublicKey
       for (const signer of instructions.signers){
         tx.sign(signer)
       }
-    const signed = await wallet.signTransaction(tx);
-    await connection.sendRawTransaction(signed?.serialize() as any);
+      const signed = await wallet.signTransaction(tx);
+      await connection.sendRawTransaction(signed?.serialize() as any);
     } catch (error) {
       console.error("Failed to deposit SOL:", error);
     }
@@ -90,8 +89,8 @@ tx.feePayer = wallet?.publicKey as PublicKey
       for (const signer of instructions.signers){
         tx.sign(signer)
       }
-          const signed = await wallet.signTransaction(tx);
-          await connection.sendRawTransaction(signed?.serialize() as any, {skipPreflight:false});
+      const signed = await wallet.signTransaction(tx);
+      await connection.sendRawTransaction(signed?.serialize() as any, {skipPreflight:false});
     } catch (error) {
       console.error("Failed to withdraw SOL:", error);
     }
@@ -150,7 +149,7 @@ tx.feePayer = wallet?.publicKey as PublicKey
           <div className="flex flex-col lg:flex-row justify-center mx-auto px-4 py-6 gap-12 mg:gap-0">
             <div className="flex-1 p-4 space-y-3 max-w-[650px] w-full">
               <p className="text-base md:text-[22px]">
-                A prize pool protocol with friends. . . don't use this yet, work in progress
+                Welcome to the simplest way to dive into decentralized finance with your friends. Here, you can pool your SOL to get meSOL, a token that not only represents your share but also gives you a chance to earn all future transaction fees from the pool. It's like getting a lottery ticket every time you participate!
               </p>
               {amount} Sol
               <Slider
@@ -192,7 +191,7 @@ tx.feePayer = wallet?.publicKey as PublicKey
                 size="lg" 
                 className="hover:bg-green-700 transition duration-300 ease-in-out"
               >
-                Buy meSOL
+                Invest in meSOL
               </Button>
               {checkTokenAccounts && (
                 <Button 
@@ -209,15 +208,15 @@ tx.feePayer = wallet?.publicKey as PublicKey
                   size="lg" 
                   className="hover:bg-red-700 transition duration-300 ease-in-out"
                 >
-                  Sell meSOL
+                  Cash out meSOL
                 </Button>
               )}
             </div>
               <h1 className="text-[35px] md:text-6xl font-extrabold leading-none">
-                Frens with Benefits. Pool together & win.
+                Friends with Benefits: Pool together & win big.
               </h1>
               <p className="hidden md:block text-[40px] font-extrabold">
-                One-Click Megayield.
+                One-Click Mega Returns.
               </p>
             </div>
             <div className="flex-1 flex justify-center lg:justify-end items-start">
@@ -237,11 +236,11 @@ tx.feePayer = wallet?.publicKey as PublicKey
                 <CardContent>
                   <div className="my-4 text-[22px]">
                     <div className="flex justify-between items-center">
-                      <p>TLV</p>
+                      <p>Total Locked Value</p>
                       <p>{lamports / 10 ** 9} Sol</p>
                     </div>
                     <div className="flex justify-between items-center">
-                      <p>Poolers</p>
+                      <p>Participants</p>
                       <p>{poolers}</p>
                     </div>
                   </div>
@@ -259,15 +258,13 @@ tx.feePayer = wallet?.publicKey as PublicKey
           <div className="flex flex-col md:flex-row gap-12 md:gap-12 px-6 py-12 justify-between relative">
             <div className="space-y-3 max-w-[437px] w-full">
               <p className="text-base md:text-[22px]">
-                A prize pool protocol with friends.
+                Join a new era of pooling funds with friends.
               </p>
               <h1 className="text-[33px] md:text-[40px] font-extrabold leading-none">
-                Learn How Frens with Benefits Works.
+                How Friends with Benefits Works.
               </h1>
               <p className="text-[#707070] text-sm md:text-lg">
-                It’s a one click megayield button. ATOW bsol yield is 6.471% and
-                bsol, which you re-stake 76% of, is 6.969%. You will yield 1 *
-                6.471% + 0.74 * 6.969% = 11.76744% per $ deposited.
+                It’s simple: invest together, earn together. The more you pool, the bigger the potential returns.
               </p>
             </div>
             {/* Map */}
@@ -285,8 +282,7 @@ tx.feePayer = wallet?.publicKey as PublicKey
                   </div>
                   <h4 className="text-2xl font-bold">Deposit Funds</h4>
                   <p className="text-[#707070] text-lg">
-                    Deposit your funds to stake & join the prize pool with
-                    frens. You can deposit bSOL or SOL.
+                    Stake your funds and join the prize pool with friends. You can invest SOL for meSOL, or withdraw at any tiem. It is a nearly 0-cost lottery - unless you wait, in which case you assuredly make money .. vs sol!
                   </p>
                 </div>
 
@@ -296,8 +292,7 @@ tx.feePayer = wallet?.publicKey as PublicKey
                   </div>
                   <h4 className="text-2xl font-bold">Get Ticket</h4>
                   <p className="text-[#707070] text-lg">
-                    Receive your raffle tickets for the prize pool, cross your
-                    fingers and hold your breath until you win.
+                    Receive your raffle tickets for the prize pool. Keep your fingers crossed and hope for the best! You can become winner by transferring these tokens - on any transfer, a dice is rolled out of the transfrred ammount out of total supply and you might become winner! That is to say, you will earn 1% of all deposits and half the epoch rewards every few days. Wow!
                   </p>
                 </div>
                 <div className="absolute left-[950px] bottom-[330px] space-y-2 max-w-[309px] w-full">
@@ -306,8 +301,7 @@ tx.feePayer = wallet?.publicKey as PublicKey
                   </div>
                   <h4 className="text-2xl font-bold">Win Prizes</h4>
                   <p className="text-[#707070] text-lg">
-                    Receive your raffle tickets for the prize pool, cross your
-                    fingers and hold your breath until you win.
+                    Win exciting prizes and bragging rights! All participants can withdraw their funds at any time.
                   </p>
                 </div>
               </div>
@@ -317,8 +311,7 @@ tx.feePayer = wallet?.publicKey as PublicKey
               <div className="space-y-2 relative">
                 <h4 className="text-2xl font-bold">Deposit Funds</h4>
                 <p className="text-sm text-[#707070] leading-[30px]">
-                  Deposit your funds to stake & join the prize pool with frens.
-                  You can deposit bSOL or SOL.
+                  Stake your funds and join the prize pool with friends. You can invest SOL or other tokens.
                 </p>
                 <div className="-z-10 absolute text-[150px] font-bold top-[-68px] right-4 text-[#707070]/20">
                   1
@@ -327,8 +320,7 @@ tx.feePayer = wallet?.publicKey as PublicKey
               <div className="space-y-2 relative">
                 <h4 className="text-2xl font-bold">Get Ticket</h4>
                 <p className="text-sm text-[#707070] leading-[30px]">
-                  Receive your raffle tickets for the prize pool, cross your
-                  fingers and hold your breath until you win.
+                  Receive your raffle tickets for the prize pool. Keep your fingers crossed and hope for the best!
                 </p>
                 <div className="-z-10 absolute text-[150px] font-bold top-[-68px] right-4 text-[#707070]/20">
                   2
@@ -337,8 +329,7 @@ tx.feePayer = wallet?.publicKey as PublicKey
               <div className="space-y-2 relative">
                 <h4 className="text-2xl font-bold">Win Prizes</h4>
                 <p className="text-sm text-[#707070] leading-[30px]">
-                  Win prizes and make fun of your friends if you win. All users
-                  can withdraw funds at any time.
+                  Win exciting prizes and bragging rights! All participants can withdraw their funds at any time.
                 </p>
                 <div className="-z-10 absolute text-[150px] font-bold top-[-68px] right-4 text-[#707070]/20">
                   3
