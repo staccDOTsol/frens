@@ -1,10 +1,14 @@
 
 "use client"
+import 'rc-slider/assets/index.css';
+
 import {
   useEffect,
   useMemo,
   useState,
 } from 'react';
+
+import Slider from 'rc-slider';
 
 import Footer from '@/components/footer';
 import Navbar from '@/components/navbar';
@@ -15,10 +19,7 @@ import {
 } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import WelcomeBackground from '@/components/welcome-background';
-import {
-  Button,
-  Slider,
-} from '@mantine/core';
+import { Button } from '@mantine/core';
 import { dasApi } from '@metaplex-foundation/digital-asset-standard-api';
 import { mplCore } from '@metaplex-foundation/mpl-core';
 import {
@@ -152,22 +153,30 @@ tx.feePayer = wallet?.publicKey as PublicKey
             <div className="flex-1 p-4 space-y-3 max-w-[650px] w-full">
               <p className="text-base md:text-[22px]">
                 A prize pool protocol with friends.
-              </p>
-              <Slider
-                label={(value) => `${value} SOL`}
+              </p><Slider
                 min={0}
                 max={50}
                 step={0.1}
                 value={amount}
-                onChange={(value) => setAmount(value)}
-                marks={[
-                  { value: 0, label: '0 SOL' },
-                  { value: 10, label: '10 SOL' },
-                  { value: 20, label: '20 SOL' },
-                  { value: 30, label: '30 SOL' },
-                  { value: 40, label: '40 SOL' },
-                  { value: 50, label: '50 SOL' },
-                ]}
+                onChange={(value) => setAmount(value as number)}
+                marks={{
+                  0: '0 SOL',
+                  10: '10 SOL',
+                  20: '20 SOL',
+                  30: '30 SOL',
+                  40: '40 SOL',
+                  50: '50 SOL',
+                }}
+                trackStyle={{ backgroundColor: 'green', height: 10 }}
+                handleStyle={{
+                  borderColor: 'green',
+                  height: 24,
+                  width: 24,
+                  marginLeft: -12,
+                  marginTop: -7,
+                  backgroundColor: 'white',
+                }}
+                railStyle={{ backgroundColor: 'gray', height: 10 }}
               />
               <Button onClick={handleDepositSol} color="green" size="lg" className="mt-4">
                 Buy SOL
