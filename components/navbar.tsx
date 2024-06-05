@@ -8,20 +8,8 @@ import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 export default function Navbar() {
   const routes = [
     {
-      path: '/vaults',
-      label: 'Vaults',
-    },
-    {
-      path: '/winners',
-      label: 'Winners',
-    },
-    {
-      path: '/history',
-      label: 'History',
-    },
-    {
-      path: '/poolers',
-      label: 'Poolers',
+      path: '/',
+      label: 'Home',
     },
   ];
   return (

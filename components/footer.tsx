@@ -37,22 +37,7 @@ export default function Footer() {
           <div className="space-y-4">
             <h4 className="font-bold text-2xl">Explore</h4>
             <ul className="text-xl text-[#707070] space-y-1">
-              <li>
-                <Link href="/vaults">Vaults</Link>
-              </li>
-              <li>
-                <Link href="/winners">Winners</Link>
-              </li>
-
-              <li>
-                <Link href="/history">History</Link>
-              </li>
-              <li>
-                <Link href="/poolers">Poolers</Link>
-              </li>
-              <li>
-                <Link href="/home">Home</Link>
-              </li>
+            
               <li>
                 <Link href="/">Welcome</Link>
               </li>

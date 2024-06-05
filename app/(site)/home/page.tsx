@@ -1,10 +1,8 @@
-import Footer from '@/components/footer';
 import {
   Card,
-  CardHeader,
-  CardTitle,
   CardContent,
   CardFooter,
+  CardHeader,
 } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 
