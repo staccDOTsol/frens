@@ -44,7 +44,7 @@ import {
 import {
   depositSol,
   withdrawSol,
-} from '../../../spl-stake-pool';
+} from '../../spl-stake-pool';
 
 const mintAddy = new PublicKey("5TvAagYQ7vLVsqWgig5RNag4twTxqHUonzNitG5UfBk")
 const stakeAddy = new PublicKey("tJ2sKEdsGXsxsUZrtrgBcqUWopKEVd3ijkXJ2LR46z5")
