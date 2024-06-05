@@ -178,11 +178,35 @@ tx.feePayer = wallet?.publicKey as PublicKey
                 }}
                 railStyle={{ backgroundColor: 'gray', height: 10 }}
               />
-              <Button onClick={handleDepositSol} color="darkgreen" size="lg" className="mt-4">
+              <Button onClick={handleDepositSol}   style={{
+                  backgroundColor: '#28a745', 
+                  color: 'white', 
+                  borderRadius: '8px', 
+                  padding: '10px 20px', 
+                  fontSize: '16px', 
+                  fontWeight: 'bold',
+                  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
+                }} 
+                size="lg" 
+                className="mt-4 hover:bg-green-700 transition duration-300 ease-in-out"
+              >
                 Buy meSOL
               </Button>
               {checkTokenAccounts && (
-                <Button onClick={handleWithdrawSol} color="darkred" size="lg" className="mt-4">
+                <Button 
+                  onClick={handleWithdrawSol} 
+                  style={{
+                    backgroundColor: '#dc3545', 
+                    color: 'white', 
+                    borderRadius: '8px', 
+                    padding: '10px 20px', 
+                    fontSize: '16px', 
+                    fontWeight: 'bold',
+                    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
+                  }} 
+                  size="lg" 
+                  className="mt-4 hover:bg-red-700 transition duration-300 ease-in-out"
+                >
                   Sell meSOL
                 </Button>
               )}
