@@ -10,7 +10,11 @@ import {
   ConnectionProvider,
   WalletProvider,
 } from '@solana/wallet-adapter-react';
-import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
+import {
+  WalletDisconnectButton,
+  WalletModalProvider,
+  WalletMultiButton,
+} from '@solana/wallet-adapter-react-ui';
 import {
   PhantomWalletAdapter,
   SolflareWalletAdapter,
@@ -49,6 +53,8 @@ export function Providers({ children }: { children: ReactNode }) {
       <ConnectionProvider endpoint={endpoint as string}>
           <WalletProvider wallets={wallets} autoConnect>
               <WalletModalProvider>
+                  <WalletMultiButton />
+                  <WalletDisconnectButton />
                   {children}
               </WalletModalProvider>
           </WalletProvider>

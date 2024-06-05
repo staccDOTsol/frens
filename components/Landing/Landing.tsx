@@ -152,7 +152,7 @@ tx.feePayer = wallet?.publicKey as PublicKey
           <div className="flex flex-col lg:flex-row justify-center mx-auto px-4 py-6 gap-12 mg:gap-0">
             <div className="flex-1 p-4 space-y-3 max-w-[650px] w-full">
               <p className="text-base md:text-[22px]">
-                A prize pool protocol with friends.
+                A prize pool protocol with friends. . . don't use this yet, work in progress
               </p>
               {amount} Sol
               <Slider
