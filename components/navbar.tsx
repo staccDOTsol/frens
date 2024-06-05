@@ -3,7 +3,14 @@ import '@solana/wallet-adapter-react-ui/styles.css';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { useWallet } from '@solana/wallet-adapter-react';
+import {
+  WalletConnectButton,
+  WalletDisconnectButton,
+} from '@solana/wallet-adapter-react-ui';
+
 export default function Navbar() {
+  const wallet = useWallet();
   const routes = [
     {
       path: '/',
@@ -33,6 +40,7 @@ export default function Navbar() {
               </Link>
             ))}
           </div>
+          {wallet.connected ? <WalletDisconnectButton /> : <WalletConnectButton />}
         </div>
       </nav>
     </div>
