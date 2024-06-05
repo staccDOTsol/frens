@@ -1,4 +1,5 @@
-"use client";
+
+"use client"
 import {
   useEffect,
   useMemo,
@@ -6,9 +7,16 @@ import {
 } from 'react';
 
 import Footer from '@/components/footer';
+import Navbar from '@/components/navbar';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+} from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
+import WelcomeBackground from '@/components/welcome-background';
 import {
   Button,
-  Card,
   Slider,
 } from '@mantine/core';
 import { dasApi } from '@metaplex-foundation/digital-asset-standard-api';
@@ -21,7 +29,6 @@ import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
 import {
   walletAdapterIdentity,
 } from '@metaplex-foundation/umi-signer-wallet-adapters';
-import { Separator } from '@radix-ui/react-separator';
 import { TOKEN_2022_PROGRAM_ID } from '@solana/spl-token';
 import {
   useConnection,
@@ -37,141 +44,145 @@ import {
 import {
   depositSol,
   withdrawSol,
-} from '../../../spl-stake-pool';
-import Navbar from '../navbar';
-import {
-  CardContent,
-  CardHeader,
-} from '../ui/card';
+} from '../../spl-stake-pool';
 
-const mintAddy = new PublicKey("5TvAagYQ7vLVsqWgig5RNag4twTxqHUonzNitG5UfBk");
-const stakeAddy = new PublicKey("tJ2sKEdsGXsxsUZrtrgBcqUWopKEVd3ijkXJ2LR46z5");
-
+const mintAddy = new PublicKey("5TvAagYQ7vLVsqWgig5RNag4twTxqHUonzNitG5UfBk")
+const stakeAddy = new PublicKey("tJ2sKEdsGXsxsUZrtrgBcqUWopKEVd3ijkXJ2LR46z5")
 export default function WelcomePage() {
   const { connection } = useConnection();
   const wallet = useWallet();
   const [amount, setAmount] = useState(0);
-  const [checkTokenAccounts, setCheckTokensAccounts] = useState(false);
 
+  const [lamports, setLamports] = useState(0);
+  const [poolers, setPoolers] = useState(0);
 
-const umi = useMemo(() => {
-  const u = createUmi(connection)
-    .use(mplCore())
-    .use(dasApi());
-
-  if (wallet) {
-    return u.use(walletAdapterIdentity(wallet));
-  }
-  const anonSigner = generateSigner(u);
-  return u.use(signerIdentity(anonSigner));
-}, [wallet, connection]);
-const [lamports, setLamports] = useState(0);
-const [poolers, setPoolers] = useState(0);
-  useEffect(() => {
-    const checkAccounts = async () => {
-      if (wallet && wallet.publicKey) {
-
-  connection.getBalance(stakeAddy)
-  .then((data: any) => {
-    setLamports(data);
-  });
-  connection.getParsedProgramAccounts(TOKEN_2022_PROGRAM_ID, {
-    filters: [
-      {
-        memcmp: {
-          offset: 0,
-          bytes: mintAddy.toBase58(),
-        }
-      }
-    ]
-  }).then((data: any) => {
-    console.log(data)
-    setPoolers(data.length)
-  })
-        const tokenAccounts = await connection.getTokenAccountsByOwner(wallet.publicKey, { mint: mintAddy });
-        setCheckTokensAccounts(tokenAccounts.value.length > 0);
-      }
-    };
-    checkAccounts();
-  }, [wallet, connection]);
-
+  const stakePoolAddress = new PublicKey("GJwP3bZcMXgej4eGz7LBBexFjpJ8c5dXLqU4rJP5HzRE");//GJwP3bZcMXgej4eGz7LBBexFjpJ8c5dXLqU4rJP5HzRE
+  
   const handleDepositSol = async () => {
     if (!wallet || !wallet.publicKey || !wallet.signTransaction) return;
-    const lamports = parseFloat(amount.toString()) * LAMPORTS_PER_SOL;
+    const lamports = amount * LAMPORTS_PER_SOL;
     try {
-      const instructions = await depositSol(connection, stakeAddy, wallet.publicKey, lamports);
+      const instructions = await depositSol(connection, stakePoolAddress, wallet.publicKey, lamports);
       const tx = new Transaction().add(
-        ComputeBudgetProgram.setComputeUnitPrice({ microLamports: 94000 })
-      ).add(...instructions.instructions);
-
-      tx.recentBlockhash = (await connection.getRecentBlockhash()).blockhash;
-      tx.feePayer = wallet.publicKey;
-      for (const signer of instructions.signers) {
-        tx.sign(signer);
+        ComputeBudgetProgram.setComputeUnitPrice({microLamports: 94000})).add(
+        ...instructions.instructions);
+    
+      tx.recentBlockhash = (await connection.getRecentBlockhash()).blockhash
+tx.feePayer = wallet?.publicKey as PublicKey
+      for (const signer of instructions.signers){
+        tx.sign(signer)
       }
-      const signed = await wallet.signTransaction(tx);
-      await connection.sendRawTransaction(signed.serialize());
+    const signed = await wallet.signTransaction(tx);
+    await connection.sendRawTransaction(signed?.serialize() as any);
     } catch (error) {
       console.error("Failed to deposit SOL:", error);
     }
   };
-
+  
   const handleWithdrawSol = async () => {
     if (!wallet || !wallet.publicKey || !wallet.signTransaction) return;
     try {
-      const instructions = await withdrawSol(connection, stakeAddy, wallet.publicKey, wallet.publicKey, amount);
+      const instructions = await withdrawSol(connection, stakePoolAddress, wallet.publicKey, wallet.publicKey, (amount));
       const tx = new Transaction().add(
-        ComputeBudgetProgram.setComputeUnitPrice({ microLamports: 94000 })
-      ).add(...instructions.instructions);
-
-      tx.recentBlockhash = (await connection.getRecentBlockhash()).blockhash;
-      tx.feePayer = wallet.publicKey;
-      for (const signer of instructions.signers) {
-        tx.sign(signer);
+        ComputeBudgetProgram.setComputeUnitPrice({microLamports: 94000})).add(...instructions.instructions);
+      tx.recentBlockhash = (await connection.getRecentBlockhash()).blockhash
+      tx.feePayer = wallet?.publicKey as PublicKey
+      for (const signer of instructions.signers){
+        tx.sign(signer)
       }
-      const signed = await wallet.signTransaction(tx);
-      await connection.sendRawTransaction(signed.serialize(), { skipPreflight: false });
+          const signed = await wallet.signTransaction(tx);
+          await connection.sendRawTransaction(signed?.serialize() as any, {skipPreflight:false});
     } catch (error) {
       console.error("Failed to withdraw SOL:", error);
     }
   };
+  useEffect(() => {
+   
+    connection.getBalance(stakeAddy)
+      .then((data: any) => {
+        setLamports(data);
+      });
+      connection.getParsedProgramAccounts(TOKEN_2022_PROGRAM_ID, {
+        filters: [
+          {
+            memcmp: {
+              offset: 0,
+              bytes: mintAddy.toBase58(),
+            }
+          }
+        ]
+      }).then((data: any) => {
+        console.log(data)
+        setPoolers(data.length)
+      })
+  }, []);
+
+  const umi = useMemo(() => {
+    const u = createUmi(connection)
+      .use(mplCore())
+      .use(dasApi());
+
+    if (wallet) {
+      return u.use(walletAdapterIdentity(wallet));
+    }
+    const anonSigner = generateSigner(u);
+    return u.use(signerIdentity(anonSigner));
+  }, [wallet, connection]);
+  const [checkTokenAccounts, setCheckTokensAccounts] = useState(false)
+  useEffect(() => {
+    const doit = async () => {
+      if (!wallet.publicKey) return
+      
+    const accounts = await connection.getTokenAccountsByOwner(wallet.publicKey, { mint: mintAddy });
+    setCheckTokensAccounts(accounts.value.length > 0)
+
+  }
+  if (wallet.publicKey) {
+    doit()
+  }
+  }, [wallet.publicKey])
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="">
+      <WelcomeBackground />
       <Navbar />
-      <div className="flex flex-col items-center justify-center min-h-screen">
-        <h1 className="text-4xl font-bold mb-4">A prize pool protocol with friends.</h1>
-        <Slider
-          value={amount}
-          onChange={setAmount}
-          min={0}
-          max={50}
-          step={10}
-          label={(value) => `${value} SOL`}
-          className="w-full max-w-md mb-4"
-          marks={[
-            { value: 0, label: '0 SOL' },
-            { value: 10, label: '10 SOL' },
-            { value: 20, label: '20 SOL' },
-            { value: 30, label: '30 SOL' },
-            { value: 40, label: '40 SOL' },
-            { value: 50, label: '50 SOL' },
-          ]}
-        />
-        <Button onClick={handleDepositSol} color="green" size="lg" className="mt-4">
-          Buy SOL
-        </Button>
-        {checkTokenAccounts && (
-          <Button onClick={handleWithdrawSol} color="red" size="lg" className="mt-4">
-            Sell SOL
-          </Button>
-        )}
-        <h1 className="text-[35px] md:text-6xl font-extrabold leading-none">
-          Frens with Benefits. Pool together & win.
-        </h1>
-        <p className="hidden md:block text-[40px] font-extrabold">
-          One-Click Megayield.
-        </p>
+      <div className="md:mt-44 flex justify-center items-center">
+        <div className="max-w-screen-2xl w-full">
+          <div className="flex flex-col lg:flex-row justify-center mx-auto px-4 py-6 gap-12 mg:gap-0">
+            <div className="flex-1 p-4 space-y-3 max-w-[650px] w-full">
+              <p className="text-base md:text-[22px]">
+                A prize pool protocol with friends.
+              </p>
+              <Slider
+                label={(value) => `${value} SOL`}
+                min={0}
+                max={50}
+                step={0.1}
+                value={amount}
+                onChange={(value) => setAmount(value)}
+                marks={[
+                  { value: 0, label: '0 SOL' },
+                  { value: 10, label: '10 SOL' },
+                  { value: 20, label: '20 SOL' },
+                  { value: 30, label: '30 SOL' },
+                  { value: 40, label: '40 SOL' },
+                  { value: 50, label: '50 SOL' },
+                ]}
+              />
+              <Button onClick={handleDepositSol} color="green" size="lg" className="mt-4">
+                Buy SOL
+              </Button>
+              {checkTokenAccounts && (
+                <Button onClick={handleWithdrawSol} color="red" size="lg" className="mt-4">
+                  Sell SOL
+                </Button>
+              )}
+              <h1 className="text-[35px] md:text-6xl font-extrabold leading-none">
+                Frens with Benefits. Pool together & win.
+              </h1>
+              <p className="hidden md:block text-[40px] font-extrabold">
+                One-Click Megayield.
+              </p>
             </div>
             <div className="flex-1 flex justify-center lg:justify-end items-start">
               <Card className="max-w-[358px] w-full">
@@ -201,6 +212,12 @@ const [poolers, setPoolers] = useState(0);
                 </CardContent>
                 <Separator />
               </Card>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Map */}
       <div className="w-full mt-12 mb-12 md:mt-44 md:mb-44">
         <div className="max-w-screen-2xl w-full mx-auto">
           <div className="flex flex-col md:flex-row gap-12 md:gap-12 px-6 py-12 justify-between relative">
@@ -300,7 +317,5 @@ const [poolers, setPoolers] = useState(0);
         <Footer />
       </div>
     </div>
-    </div>
   );
 }
-
