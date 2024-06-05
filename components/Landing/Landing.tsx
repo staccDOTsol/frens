@@ -15,6 +15,10 @@ import {
 } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import WelcomeBackground from '@/components/welcome-background';
+import {
+  Button,
+  Slider,
+} from '@mantine/core';
 import { dasApi } from '@metaplex-foundation/digital-asset-standard-api';
 import { mplCore } from '@metaplex-foundation/mpl-core';
 import {
@@ -30,15 +34,69 @@ import {
   useConnection,
   useWallet,
 } from '@solana/wallet-adapter-react';
-import { PublicKey } from '@solana/web3.js';
+import {
+  ComputeBudgetProgram,
+  LAMPORTS_PER_SOL,
+  PublicKey,
+  Transaction,
+} from '@solana/web3.js';
+
+import {
+  depositSol,
+  withdrawSol,
+} from '../../../spl-stake-pool';
 
 const mintAddy = new PublicKey("5TvAagYQ7vLVsqWgig5RNag4twTxqHUonzNitG5UfBk")
 const stakeAddy = new PublicKey("tJ2sKEdsGXsxsUZrtrgBcqUWopKEVd3ijkXJ2LR46z5")
 export default function WelcomePage() {
-  const [lamports, setLamports] = useState(0);
-  const [poolers, setPoolers] = useState(0);
   const { connection } = useConnection();
   const wallet = useWallet();
+  const [amount, setAmount] = useState("0");
+  const mintAddy = new PublicKey("YourMintAddressHere");
+
+  const [lamports, setLamports] = useState(0);
+  const [poolers, setPoolers] = useState(0);
+
+  const stakePoolAddress = new PublicKey("GJwP3bZcMXgej4eGz7LBBexFjpJ8c5dXLqU4rJP5HzRE");//GJwP3bZcMXgej4eGz7LBBexFjpJ8c5dXLqU4rJP5HzRE
+  
+  const handleDepositSol = async () => {
+    if (!wallet || !wallet.publicKey || !wallet.signTransaction) return;
+    const lamports = parseFloat(amount) * LAMPORTS_PER_SOL;
+    try {
+      const instructions = await depositSol(connection, stakePoolAddress, wallet.publicKey, lamports);
+      const tx = new Transaction().add(
+        ComputeBudgetProgram.setComputeUnitPrice({microLamports: 94000})).add(
+        ...instructions.instructions);
+    
+      tx.recentBlockhash = (await connection.getRecentBlockhash()).blockhash
+tx.feePayer = wallet?.publicKey as PublicKey
+      for (const signer of instructions.signers){
+        tx.sign(signer)
+      }
+    const signed = await wallet.signTransaction(tx);
+    await connection.sendRawTransaction(signed?.serialize() as any);
+    } catch (error) {
+      console.error("Failed to deposit SOL:", error);
+    }
+  };
+  
+  const handleWithdrawSol = async () => {
+    if (!wallet || !wallet.publicKey || !wallet.signTransaction) return;
+    try {
+      const instructions = await withdrawSol(connection, stakePoolAddress, wallet.publicKey, wallet.publicKey, parseFloat(amount));
+      const tx = new Transaction().add(
+        ComputeBudgetProgram.setComputeUnitPrice({microLamports: 94000})).add(...instructions.instructions);
+      tx.recentBlockhash = (await connection.getRecentBlockhash()).blockhash
+      tx.feePayer = wallet?.publicKey as PublicKey
+      for (const signer of instructions.signers){
+        tx.sign(signer)
+      }
+          const signed = await wallet.signTransaction(tx);
+          await connection.sendRawTransaction(signed?.serialize() as any, {skipPreflight:false});
+    } catch (error) {
+      console.error("Failed to withdraw SOL:", error);
+    }
+  };
   useEffect(() => {
    
     connection.getBalance(stakeAddy)
@@ -71,6 +129,20 @@ export default function WelcomePage() {
     const anonSigner = generateSigner(u);
     return u.use(signerIdentity(anonSigner));
   }, [wallet, connection]);
+  const [checkTokenAccounts, setCheckTokensAccounts] = useState(false)
+  useEffect(() => {
+    const doit = async () => {
+      if (!wallet.publicKey) return
+      
+    const accounts = await connection.getTokenAccountsByOwner(wallet.publicKey, { mint: mintAddy });
+    setCheckTokensAccounts(accounts.value.length > 0)
+
+  }
+  if (wallet.publicKey) {
+    doit()
+  }
+  }, [wallet.publicKey])
+
   return (
     <div className="">
       <WelcomeBackground />
@@ -82,6 +154,30 @@ export default function WelcomePage() {
               <p className="text-base md:text-[22px]">
                 A prize pool protocol with friends.
               </p>
+              <Slider
+        label={(value) => `${value} SOL`}
+        min={0}
+        max={50}
+        step={0.1}
+        value={parseFloat(amount)}
+        onChange={(value) => setAmount(value.toString())}
+        marks={[
+          { value: 0, label: '0 SOL' },
+          { value: 10, label: '10 SOL' },
+          { value: 20, label: '20 SOL' },
+          { value: 30, label: '30 SOL' },
+          { value: 40, label: '40 SOL' },
+          { value: 50, label: '50 SOL' },
+        ]}
+      />
+      <Button onClick={handleDepositSol} color="green" size="lg">
+        Buy SOL
+      </Button>
+      {checkTokenAccounts && (
+        <Button onClick={handleWithdrawSol} color="red" size="lg">
+          Sell SOL
+        </Button>
+      )}
               <h1 className="text-[35px] md:text-6xl font-extrabold leading-none">
                 Frens with Benefits. Pool together & win.
               </h1>
