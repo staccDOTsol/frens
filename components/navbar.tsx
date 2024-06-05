@@ -1,5 +1,9 @@
+import '@solana/wallet-adapter-react-ui/styles.css';
+
 import Image from 'next/image';
 import Link from 'next/link';
+
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 
 export default function Navbar() {
   const routes = [
@@ -43,12 +47,7 @@ export default function Navbar() {
               </Link>
             ))}
           </div>
-          <Link
-            href="/home"
-            className="bg-frensYellow text-sm font-semibold py-3 px-5 rounded-full uppercase hover:bg-[#FFD33F]/80"
-          >
-            Launch App
-          </Link>
+          <WalletMultiButton />
         </div>
       </nav>
     </div>
