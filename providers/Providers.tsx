@@ -1,10 +1,15 @@
 'use client';
 
+import '@solana/wallet-adapter-react-ui/styles.css';
+
 import {
   ReactNode,
   useMemo,
   useState,
 } from 'react';
+
+import Image from 'next/image';
+import Link from 'next/link';
 
 import {
   ConnectionProvider,
@@ -29,15 +34,6 @@ export function Providers({ children }: { children: ReactNode }) {
     []
   );
 
-
-
-
-  // useEffect(() => {
-  //   if (env === 'devnet' && queryEnv !== 'devnet') {
-  //     doSetEnv('devnet');
-  //   }
-  // }, []);
-
   const endpoint = useMemo(() => {
     switch (env) {
       case 'mainnet':
@@ -47,15 +43,27 @@ export function Providers({ children }: { children: ReactNode }) {
     }
   }, [env]);
 
-      
-    return (
-      <ConnectionProvider endpoint={endpoint as string}>
-          <WalletProvider wallets={wallets} autoConnect>
-              <WalletModalProvider>
-                  <WalletMultiButton />
-                  {children}
-              </WalletModalProvider>
-          </WalletProvider>
-      </ConnectionProvider>
+  return (
+    <ConnectionProvider endpoint={endpoint as string}>
+      <WalletProvider wallets={wallets} autoConnect>
+        <WalletModalProvider>
+          <div className="bg-transparent">
+            <nav className="max-w-[1640px] mx-auto flex justify-between items-center p-6">
+              <Link href="/">
+                <Image
+                  src="/images/frens-logo-17.png"
+                  alt="Fens Loog"
+                  height={150}
+                  width={150}
+                />
+              </Link>
+              <WalletMultiButton />
+            </nav>
+          </div>
+          {children}
+        </WalletModalProvider>
+      </WalletProvider>
+    </ConnectionProvider>
   );
 }
+

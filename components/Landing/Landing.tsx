@@ -11,7 +11,6 @@ import {
 import Slider from 'rc-slider';
 
 import Footer from '@/components/footer';
-import Navbar from '@/components/navbar';
 import {
   Card,
   CardContent,
@@ -146,7 +145,6 @@ tx.feePayer = wallet?.publicKey as PublicKey
   return (
     <div className="">
       <WelcomeBackground />
-      <Navbar />
       <div className="md:mt-44 flex justify-center items-center">
         <div className="max-w-screen-2xl w-full">
           <div className="flex flex-col lg:flex-row justify-center mx-auto px-4 py-6 gap-12 mg:gap-0">
