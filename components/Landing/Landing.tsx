@@ -179,7 +179,7 @@ tx.feePayer = wallet?.publicKey as PublicKey
                   backgroundColor: 'white',
                 }}
                 railStyle={{ backgroundColor: 'gray', height: 10 }}
-              /> <div className="flex space-x-4 mt-4">
+              /> <div className="flex space-x-4 mt-4 margin-top-10">
               <Button 
                 onClick={handleDepositSol} 
                 style={{
