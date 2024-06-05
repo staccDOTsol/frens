@@ -154,29 +154,29 @@ tx.feePayer = wallet?.publicKey as PublicKey
                 A prize pool protocol with friends.
               </p>
               <Slider
-        label={(value) => `${value} SOL`}
-        min={0}
-        max={50}
-        step={0.1}
-        value={parseFloat(amount)}
-        onChange={(value) => setAmount(value.toString())}
-        marks={[
-          { value: 0, label: '0 SOL' },
-          { value: 10, label: '10 SOL' },
-          { value: 20, label: '20 SOL' },
-          { value: 30, label: '30 SOL' },
-          { value: 40, label: '40 SOL' },
-          { value: 50, label: '50 SOL' },
-        ]}
-      />
-      <Button onClick={handleDepositSol} color="green" size="lg">
-        Buy SOL
-      </Button>
-      {checkTokenAccounts && (
-        <Button onClick={handleWithdrawSol} color="red" size="lg">
-          Sell SOL
-        </Button>
-      )}
+                label={(value) => `${value} SOL`}
+                min={0}
+                max={50}
+                step={0.1}
+                value={amount}
+                onChange={(value) => setAmount(value)}
+                marks={[
+                  { value: 0, label: '0 SOL' },
+                  { value: 10, label: '10 SOL' },
+                  { value: 20, label: '20 SOL' },
+                  { value: 30, label: '30 SOL' },
+                  { value: 40, label: '40 SOL' },
+                  { value: 50, label: '50 SOL' },
+                ]}
+              />
+              <Button onClick={handleDepositSol} color="green" size="lg" className="mt-4">
+                Buy SOL
+              </Button>
+              {checkTokenAccounts && (
+                <Button onClick={handleWithdrawSol} color="red" size="lg" className="mt-4">
+                  Sell SOL
+                </Button>
+              )}
               <h1 className="text-[35px] md:text-6xl font-extrabold leading-none">
                 Frens with Benefits. Pool together & win.
               </h1>
