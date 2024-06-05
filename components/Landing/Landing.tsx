@@ -2,6 +2,7 @@
 "use client"
 import {
   useEffect,
+  useMemo,
   useState,
 } from 'react';
 
@@ -14,8 +15,21 @@ import {
 } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import WelcomeBackground from '@/components/welcome-background';
+import { dasApi } from '@metaplex-foundation/digital-asset-standard-api';
+import { mplCore } from '@metaplex-foundation/mpl-core';
+import {
+  generateSigner,
+  signerIdentity,
+} from '@metaplex-foundation/umi';
+import { createUmi } from '@metaplex-foundation/umi-bundle-defaults';
+import {
+  walletAdapterIdentity,
+} from '@metaplex-foundation/umi-signer-wallet-adapters';
 import { TOKEN_2022_PROGRAM_ID } from '@solana/spl-token';
-import { useConnection } from '@solana/wallet-adapter-react';
+import {
+  useConnection,
+  useWallet,
+} from '@solana/wallet-adapter-react';
 import { PublicKey } from '@solana/web3.js';
 
 const mintAddy = new PublicKey("5TvAagYQ7vLVsqWgig5RNag4twTxqHUonzNitG5UfBk")
@@ -24,6 +38,7 @@ export default function WelcomePage() {
   const [lamports, setLamports] = useState(0);
   const [poolers, setPoolers] = useState(0);
   const { connection } = useConnection();
+  const wallet = useWallet();
   useEffect(() => {
    
     connection.getBalance(stakeAddy)
@@ -45,6 +60,17 @@ export default function WelcomePage() {
       })
   }, []);
 
+  const umi = useMemo(() => {
+    const u = createUmi(connection)
+      .use(mplCore())
+      .use(dasApi());
+
+    if (wallet) {
+      return u.use(walletAdapterIdentity(wallet));
+    }
+    const anonSigner = generateSigner(u);
+    return u.use(signerIdentity(anonSigner));
+  }, [wallet, connection]);
   return (
     <div className="">
       <WelcomeBackground />

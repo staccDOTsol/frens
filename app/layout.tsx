@@ -25,9 +25,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={poppins.className}>
-      <MantineProvider defaultColorScheme="light">
-          <Providers>{children}</Providers>
-        </MantineProvider>
+          <Providers>
+      <MantineProvider defaultColorScheme="light">{children}       </MantineProvider></Providers>
+ 
 
 </body>
      
