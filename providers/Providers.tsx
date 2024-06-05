@@ -6,6 +6,7 @@ import {
   useState,
 } from 'react';
 
+import Navbar from '@/components/navbar';
 import {
   ConnectionProvider,
   WalletProvider,
@@ -49,6 +50,7 @@ export function Providers({ children }: { children: ReactNode }) {
       <ConnectionProvider endpoint={endpoint as string}>
           <WalletProvider wallets={wallets} autoConnect>
               <WalletModalProvider>
+                  <Navbar />
                   {children}
               </WalletModalProvider>
           </WalletProvider>
