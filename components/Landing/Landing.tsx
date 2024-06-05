@@ -60,7 +60,7 @@ export default function WelcomePage() {
   
   const handleDepositSol = async () => {
     if (!wallet || !wallet.publicKey || !wallet.signTransaction) return;
-    const lamports = parseFloat(amount) * LAMPORTS_PER_SOL;
+    const lamports = amount * LAMPORTS_PER_SOL;
     try {
       const instructions = await depositSol(connection, stakePoolAddress, wallet.publicKey, lamports);
       const tx = new Transaction().add(
@@ -82,7 +82,7 @@ tx.feePayer = wallet?.publicKey as PublicKey
   const handleWithdrawSol = async () => {
     if (!wallet || !wallet.publicKey || !wallet.signTransaction) return;
     try {
-      const instructions = await withdrawSol(connection, stakePoolAddress, wallet.publicKey, wallet.publicKey, parseFloat(amount));
+      const instructions = await withdrawSol(connection, stakePoolAddress, wallet.publicKey, wallet.publicKey, (amount));
       const tx = new Transaction().add(
         ComputeBudgetProgram.setComputeUnitPrice({microLamports: 94000})).add(...instructions.instructions);
       tx.recentBlockhash = (await connection.getRecentBlockhash()).blockhash
